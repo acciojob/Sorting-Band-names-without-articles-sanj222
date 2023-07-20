@@ -1,12 +1,19 @@
-const listItem=document.getElementById("list");
+() => {
+  cy.get("li").should("have.length.at.least", 1);
 
-let touristSpots = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
+  const tags_content = [];
+  const li_tags_count = document.getElementsByTagName('li').length;
 
-touristSpots.sort();
+  // Getting li tags content and checking if they are without any articles and in sorted order
+  for (let index = 0; index < li_tags_count; index++) {
+    cy.get("li").eq(index).then($el => {
+      tags_content.push($el.text());
+    });
+  }
 
-touristSpots.forEach((item)=>{
-	const list=document.createElement("li");
-	list.innerText=item;
-
-	listItem.appendChild(list);
-})
+  tags_content.forEach(tag_content => {
+    const first_word = tag_content.split(" ")[0];
+    const not_article = first_word !== "A" && first_word !== "An" && first_word !== "The";
+    expect(not_article).to.be.equal(true);
+  });
+}
