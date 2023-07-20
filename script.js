@@ -1,19 +1,12 @@
-//your code here
+const listItem=document.getElementById("list");
 
- let bandNames = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
+let touristSpots = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
 
-        
-        function removeArticles(name) {
-            return name.replace(/^The\s|^A\s|^An\s/i, '');
-        }
+touristSpots.sort();
 
-        // Sorting the band names without articles in lexicographic order
-        bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
+touristSpots.forEach((item)=>{
+	const list=document.createElement("li");
+	list.innerText=item;
 
-        // Displaying the sorted band names inside the ul tag with li tags
-        const ulElement = document.getElementById('band');
-        bandNames.forEach(band => {
-            const liElement = document.createElement('li');
-            liElement.textContent = band;
-            ulElement.appendChild(liElement);
-        });
+	listItem.appendChild(list);
+})
